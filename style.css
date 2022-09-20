@@ -30,8 +30,16 @@
     height: 100%;
     border-radius: 20%;
     opacity: 0;
+    transition: opacity 3s;
 }
 
 .selectedCard .pic {
     opacity:1;
+    transition: opacity 3s;
+}
+
+@media screen and (max-width: 414px) {
+}
+.game {
+    max-width: 70%;
 }
