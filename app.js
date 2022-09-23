@@ -1,36 +1,57 @@
-//=============opening cards=============
-const cards = document.querySelectorAll('.card');
-function showHiddenPic() {
-    this.classList.toggle('selectedCard')
-}
-cards.forEach(card => card.addEventListener('click', showHiddenPic));
-
-//============comparing cards==============
-
-// (A) FLAG FOR "ALREADY CLICKED".
-let booleanFlag = false;
 let firstCard, secondCard;
+let clickedAtLeastOnce = false;
+let boardLocked = false;
 
-if (!booleanFlag) {
-    booleanFlag = true;
-    firstCard = this;
+const cards = document.querySelectorAll('.card');
+
+cards.forEach(card => {
+    card.style.order = Math.floor(Math.random() * cards.length);
+
+    card.addEventListener('click', showHiddenPic);
+});
+
+function showHiddenPic() {
+    if (boardLocked) return;
+    if (this === firstCard) return;
+
+    this.classList.add('selectedCard');
+
+    if (!clickedAtLeastOnce) {
+        firstCard = this;
+        clickedAtLeastOnce = true;
+    } else {
+        secondCard = this;
+        clickedAtLeastOnce = false;
+
+        checkForMatch();
+    }
 }
-// (B) FUNCTION - WILL ONLY RUN IF NOT CLICKED
-function getTwoCardsToCompare () { if (!booleanFlag) {
-    // (B1) SET CLICKED TO TRUE
-    booleanFlag = true;
 
-    // (B2) DO YOUR PROCESSING HERE
-    alert("Something is done!");
+function checkForMatch() {
+    firstCard.firstChild.src === secondCard.firstChild.src
+        ? disableCards()
+        : hidePics();
+}
 
-    // (B3) RE-ENABLE AFTER PROCESSING IF YOU WANT
-    // booleanFlag = false;
-}}
+function disableCards() {
+    boardLocked = true;
 
-//==================================================================
+    setTimeout(() => {
+        firstCard.removeEventListener('click', showHiddenPic);
+        secondCard.removeEventListener('click', showHiddenPic);
+        boardLocked = false;
+    }, 1000)
+}
 
-// firstCard=document.querySelectorAll('.selectedCard');
-// const clickedCards = document.querySelectorAll('.card.selectedCard');
-// if (clickedCards[0].getAttribute.src === clickedCards[1].getAttribute.src)
-//    {console.log('Same!')}
-// console.log(clickedCards[0], clickedCards[1])
+function hidePics() {
+    boardLocked = true;
+
+    setTimeout(() => {
+        firstCard.classList.remove('selectedCard');
+    }, 500);
+
+    setTimeout(() => {
+        secondCard.classList.remove('selectedCard');
+        boardLocked = false;
+    }, 1500);
+}

@@ -1,5 +1,4 @@
 * {
-    background-color: rgb(167, 194, 185);
     list-style: none;
 }
 
@@ -11,16 +10,15 @@
 
 .allCards {
     display: grid;
-    grid-template-columns: repeat(4, 100px);
-    grid-template-rows: repeat(4, 100px);
+    grid-template-columns: repeat(4, 140px);
+    grid-template-rows: repeat(4, 140px);
     gap: 20px;
-    padding: 50px;
-    background-color: rgba(245, 245, 220, 0.37);
+    padding: 40px;
     border-radius: 20px;
 }
 
 .card {
-    background-color: rgb(25, 55, 49);
+    background-color: rgba(16, 12, 12, 0.93);
     border-radius: 20%;
     cursor: pointer;
 }
@@ -30,16 +28,10 @@
     height: 100%;
     border-radius: 20%;
     opacity: 0;
-    transition: opacity 3s;
+    transition: opacity 2s;
 }
 
 .selectedCard .pic {
     opacity:1;
-    transition: opacity 3s;
-}
-
-@media screen and (max-width: 414px) {
-}
-.game {
-    max-width: 70%;
+    transition: opacity 2s;
 }
